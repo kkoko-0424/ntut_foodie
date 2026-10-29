@@ -1,0 +1,438 @@
+/* 全局設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #18191C;
+    color: #F4F0E8;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 75px;
+}
+
+/* 頂部 Header */
+.app-header {
+    height: 56px;
+    background-color: #212225;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #2F3136;
+}
+
+.logo {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #F1A653;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #F4F0E8;
+    font-size: 1.2rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: #F1A653;
+    color: #18191C;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 頁面切換控制 */
+.page-section {
+    display: none;
+    padding: 16px;
+}
+
+.page-section.active {
+    display: block;
+}
+
+/* 主卡片容器 */
+.main-card {
+    background: #232428;
+    border: 1px solid #2F3136;
+    border-radius: 20px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+}
+
+.badge-tag {
+    display: inline-block;
+    background: rgba(241, 166, 83, 0.15);
+    color: #F1A653;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.main-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #F4F0E8;
+}
+
+.main-desc {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* 擬真抽籤圓圈 */
+.wheel-box {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    border: 3px solid #F1A653;
+    background: radial-gradient(circle, #292A2D 0%, #1E1F22 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+    transition: transform 0.2s;
+}
+
+.wheel-box:active {
+    transform: scale(0.96);
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -12px;
+    color: #F1A653;
+    font-size: 1.2rem;
+}
+
+.wheel-main-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #F4F0E8;
+    margin-bottom: 4px;
+}
+
+.wheel-sub-text {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.btn-primary-lg {
+    background: #F1A653;
+    color: #18191C;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(241, 166, 83, 0.3);
+}
+
+.spin-result-text {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: #F1A653;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+/* 快速分類網格 */
+.section-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin: 16px 0 12px 0;
+    color: #F4F0E8;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.quick-card {
+    background: #232428;
+    border: 1px solid #2F3136;
+    padding: 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.quick-card:active {
+    transform: scale(0.97);
+}
+
+.qc-title {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #F4F0E8;
+    margin-bottom: 4px;
+}
+
+.qc-desc {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+/* 🎯 篩選面板與橘色按鈕、拉桿樣式 */
+.filter-card {
+    background: #232428;
+    border: 1px solid #2F3136;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.filter-group {
+    margin-bottom: 14px;
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-group label {
+    font-size: 0.85rem;
+    color: #aaa;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.tags-container {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: #18191C;
+    color: #aaa;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: 1px solid #2F3136;
+    transition: 0.2s;
+}
+
+.tag.active {
+    background: #F1A653;
+    color: #18191C;
+    font-weight: bold;
+    border-color: #F1A653;
+}
+
+/* 客製化橘色預算滑桿 */
+.range-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.range-box input[type=range] {
+    -webkit-appearance: none;
+    flex: 1;
+    height: 6px;
+    background: #2F3136;
+    border-radius: 5px;
+    outline: none;
+}
+
+.range-box input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #F1A653;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(241, 166, 83, 0.5);
+}
+
+.range-box span {
+    font-size: 0.85rem;
+    color: #F1A653;
+    font-weight: bold;
+    min-width: 85px;
+}
+
+/* 地圖容器與 Pin */
+.map-container {
+    width: 100%;
+    height: 220px;
+    background: #212225;
+    border-radius: 14px;
+    position: relative;
+    border: 1px solid #2F3136;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.map-pin {
+    position: absolute;
+    background: #F1A653;
+    color: #18191C;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    transition: transform 0.2s;
+}
+
+.map-pin:active {
+    transform: translate(-50%, -50%) scale(0.92);
+}
+
+/* 店家卡片列表 */
+.shop-card {
+    background: #232428;
+    border: 1px solid #2F3136;
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 12px;
+    position: relative;
+}
+
+.shop-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #18191C;
+}
+
+.shop-info {
+    flex: 1;
+}
+
+.shop-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+.shop-meta {
+    font-size: 0.75rem;
+    color: #aaa;
+    margin: 4px 0;
+}
+
+.shop-tags {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.shop-tag-mini {
+    background: #18191C;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #ccc;
+}
+
+.fav-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #666;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.fav-btn.active {
+    color: #ff4d4d;
+}
+
+/* 店家詳細頁 */
+.btn-back {
+    background: #232428;
+    color: #F4F0E8;
+    border: 1px solid #2F3136;
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+}
+
+.detail-img {
+    width: 100%;
+    height: 180px;
+    border-radius: 14px;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+/* 底部導覽列 */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #212225;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #2F3136;
+    z-index: 100;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #777;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    color: #F1A653;
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+}

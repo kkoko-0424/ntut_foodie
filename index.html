@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北科吃什麼？ NTUT Foodie</title>
+    <!-- FontAwesome 圖示庫 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 頂部 Header -->
+    <header class="app-header">
+        <div class="logo">🍜 北科吃什麼？</div>
+        <button class="icon-btn" onclick="switchPage('page4')">
+            <i class="fa-solid fa-heart"></i>
+            <span class="badge" id="favCount">0</span>
+        </button>
+    </header>
+
+    <!-- 主體內容區 (4 個頁面) -->
+    <main class="app-content">
+
+        <!-- 頁面 1：今天吃什麼 -->
+        <section id="page1" class="page-section active">
+            <div class="main-card">
+                <div class="badge-tag">解決選擇困難症</div>
+                <h2 class="main-title">今天中午吃什麼？</h2>
+                <p class="main-desc">不知道吃什麼沒關係，讓命運的轉盤幫北科大同學做決定！</p>
+                
+                <!-- 抽籤圓形互動區 -->
+                <div class="wheel-box" onclick="spinWheel()">
+                    <div class="wheel-pointer">▼</div>
+                    <div class="wheel-content">
+                        <div class="wheel-main-text" id="wheelMainText">點擊開始抽籤</div>
+                        <div class="wheel-sub-text" id="wheelSubText">隨機推薦附近美食</div>
+                    </div>
+                </div>
+
+                <button class="btn-primary-lg" onclick="spinWheel()">
+                    <i class="fa-solid fa-dice"></i> 幫我抽一個！
+                </button>
+                <div id="spinResult" class="spin-result-text"></div>
+            </div>
+
+            <!-- 快速需求分類區 -->
+            <div class="section-title"><i class="fa-solid fa-bolt" style="color: #F1A653;"></i> 快速需求分類點擊</div>
+            <div class="quick-grid">
+                <div class="quick-card" onclick="selectQuickCategory('便當')">
+                    <div class="qc-title">快速省錢便當</div>
+                    <div class="qc-desc">預算 $100 內飽足</div>
+                </div>
+                <div class="quick-card" onclick="selectQuickCategory('拉麵')">
+                    <div class="qc-title">熱呼呼拉麵湯麵</div>
+                    <div class="qc-desc">校園周邊好評</div>
+                </div>
+                <div class="quick-card" onclick="selectQuickCategory('聚餐')">
+                    <div class="qc-title">三五好友聚餐</div>
+                    <div class="qc-desc">氣氛佳坐得久</div>
+                </div>
+                <div class="quick-card" onclick="selectQuickCategory('日式')">
+                    <div class="qc-title">秘密日式定食</div>
+                    <div class="qc-desc">隱藏版美食</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 頁面 2：搜尋推薦頁 (條件篩選 + 動態地圖) -->
+        <section id="page2" class="page-section">
+            <button class="btn-back" onclick="switchPage('page1')">← 返回首頁</button>
+            <div id="categoryTitle" class="section-title" style="font-size: 1.1rem; margin-top: 4px;">🎯 全部推薦店家</div>
+
+            <!-- 條件篩選卡片面板 -->
+            <div class="filter-card" id="filterCardSection">
+                <div class="filter-group">
+                    <label>類型：</label>
+                    <div class="tags-container">
+                        <span class="tag active" onclick="toggleTag(this, '全部')">全部</span>
+                        <span class="tag" onclick="toggleTag(this, '台式')">台式</span>
+                        <span class="tag" onclick="toggleTag(this, '日式')">日式</span>
+                        <span class="tag" onclick="toggleTag(this, '越式')">越式</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>預算：</label>
+                    <div class="range-box">
+                        <input type="range" id="budgetRange" min="80" max="200" step="10" value="200" oninput="updateBudget(this.value)">
+                        <span id="budgetValue">NT$ 200 以內</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 地圖區域 -->
+            <div class="section-title">🗺️ 校園周邊美食地圖</div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.703554869577!2d121.533709!3d25.044143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a97c413b0a9f%3A0x6d5e7d9b9a6b2c0!2z5ZyL56uLOTHljJfkuK3kuLrluILpg6jmiJHkuK3rpb3nmo4!5e0!3m2!1szh-TW!2stw!4v1600000000000!5m2!1szh-TW!2stw" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; position: absolute; top:0; left:0; pointer-events: none; opacity: 0.8;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+
+                <!-- 動態 Pin 標籤 -->
+                <div id="mapPins"></div>
+            </div>
+
+            <!-- 推薦店家列表 -->
+            <div class="section-title">🔥 專屬推薦店家</div>
+            <div class="shop-list" id="shopList">
+                <!-- 由 JS 動態生成 -->
+            </div>
+        </section>
+
+        <!-- 頁面 3：店家詳細介紹 -->
+        <section id="page3" class="page-section">
+            <button class="btn-back" onclick="switchPage('page2')">← 返回列表</button>
+            <div id="shopDetailContent" class="detail-container">
+                <!-- 由 JS 動態生成 -->
+            </div>
+        </section>
+
+        <!-- 頁面 4：收藏頁面 -->
+        <section id="page4" class="page-section">
+            <div class="section-title">❤️ 我的收藏店家</div>
+            <div id="favList" class="shop-list">
+                <!-- 由 JS 動態生成 -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 手機版底部導覽列 -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchPage('page1', this)">
+            <i class="fa-solid fa-compass"></i>
+            <span>今天吃什麼</span>
+        </button>
+        <button class="nav-item" onclick="openSearchPage(this)">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>搜尋推薦</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('page4', this)">
+            <i class="fa-solid fa-bookmark"></i>
+            <span>我的收藏</span>
+        </button>
+    </nav>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
